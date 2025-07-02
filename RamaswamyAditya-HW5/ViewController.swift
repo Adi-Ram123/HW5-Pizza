@@ -3,6 +3,7 @@
 // Course: CS371L
 
 import UIKit
+import FirebaseAuth
 
 protocol PizzaReloader {
     func reloadData()
@@ -42,6 +43,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             dest.delegate = self
         }
     }
-
+    
+    @IBAction func signOut(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            self.dismiss(animated:true)
+        } catch {
+            let alert = UIAlertController(title: "Sign Out Error", message: "An error occured during sign out", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "Ok", style: .default)
+            alert.addAction(ok)
+            present(alert, animated: true)
+        }
+    }
+    
 }
 

@@ -58,6 +58,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Pizza Order" id="DWP-yh-e54">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="9mm-Bn-PHT">
+                            <connections>
+                                <action selector="signOut:" destination="BYZ-38-t0r" id="xbK-le-LiG"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xL6-Ny-yhx">
                             <connections>
                                 <segue destination="hjc-NA-uUW" kind="show" identifier="pizzaSegue" id="VEp-ja-oF6"/>
@@ -233,10 +238,10 @@
             </objects>
             <point key="canvasLocation" x="1817.5572519083969" y="-27.464788732394368"/>
         </scene>
-        <!--View Controller-->
+        <!--Auth View Controller-->
         <scene sceneID="cTx-eD-QEM">
             <objects>
-                <viewController id="Xa1-Lc-j4u" sceneMemberID="viewController">
+                <viewController id="Xa1-Lc-j4u" customClass="AuthViewController" customModule="RamaswamyAditya_HW5" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ro7-36-8uL">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -244,9 +249,12 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LgR-i7-DFW">
                                 <rect key="frame" x="20" y="144" width="362" height="32"/>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="Login "/>
+                                    <segment title="Signup"/>
                                 </segments>
+                                <connections>
+                                    <action selector="authChanged:" destination="Xa1-Lc-j4u" eventType="valueChanged" id="XK3-Ck-CHm"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DmP-MW-dJb">
                                 <rect key="frame" x="20" y="215" width="57" height="21"/>
@@ -294,15 +302,15 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFc-SZ-mVs">
-                                <rect key="frame" x="159" y="419.66666666666669" width="84" height="35"/>
+                                <rect key="frame" x="165.66666666666666" y="419.66666666666669" width="71" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Sign Up"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Log In"/>
                                 <connections>
-                                    <segue destination="KYf-ge-k99" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="fnP-5l-d7p"/>
+                                    <action selector="auth:" destination="Xa1-Lc-j4u" eventType="touchUpInside" id="XU5-Dg-Qdc"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raM-IX-zfr">
-                                <rect key="frame" x="176.66666666666666" y="494" width="49" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raM-IX-zfr">
+                                <rect key="frame" x="20" y="494" width="362" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -311,6 +319,7 @@
                         <viewLayoutGuide key="safeArea" id="XOJ-wp-LUb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="raM-IX-zfr" firstAttribute="leading" secondItem="ro7-36-8uL" secondAttribute="leading" constant="20" id="24K-Uh-z9P"/>
                             <constraint firstItem="XOJ-wp-LUb" firstAttribute="trailing" secondItem="LgR-i7-DFW" secondAttribute="trailing" constant="20" id="4bk-Pn-f0g"/>
                             <constraint firstItem="DmP-MW-dJb" firstAttribute="top" secondItem="LgR-i7-DFW" secondAttribute="bottom" constant="40" id="4cf-7Z-dwt"/>
                             <constraint firstItem="nMf-xi-17b" firstAttribute="centerY" secondItem="HZA-8t-oBk" secondAttribute="centerY" id="860-5p-cO2"/>
@@ -321,6 +330,7 @@
                             <constraint firstItem="XOJ-wp-LUb" firstAttribute="trailing" secondItem="nMf-xi-17b" secondAttribute="trailing" constant="20" id="UXI-gK-0q5"/>
                             <constraint firstItem="AWw-qi-yCi" firstAttribute="centerY" secondItem="DmP-MW-dJb" secondAttribute="centerY" id="VDH-80-2DC"/>
                             <constraint firstItem="WiG-YY-52p" firstAttribute="leading" secondItem="XOJ-wp-LUb" secondAttribute="leading" constant="20" id="XzS-YB-1hP"/>
+                            <constraint firstAttribute="trailing" secondItem="raM-IX-zfr" secondAttribute="trailing" constant="20" id="YCo-QI-KWD"/>
                             <constraint firstItem="HZA-8t-oBk" firstAttribute="leading" secondItem="XOJ-wp-LUb" secondAttribute="leading" constant="20" id="Ydu-tm-pCT"/>
                             <constraint firstItem="raM-IX-zfr" firstAttribute="top" secondItem="BFc-SZ-mVs" secondAttribute="bottom" constant="39.333333333333314" id="bim-TJ-pny"/>
                             <constraint firstItem="XOJ-wp-LUb" firstAttribute="trailing" secondItem="AWw-qi-yCi" secondAttribute="trailing" constant="20" id="cnF-vl-9X6"/>
@@ -332,6 +342,16 @@
                             <constraint firstItem="BFc-SZ-mVs" firstAttribute="centerX" secondItem="ro7-36-8uL" secondAttribute="centerX" id="rOo-U7-2Gh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="authButtonText" destination="BFc-SZ-mVs" id="xjD-6B-PNY"/>
+                        <outlet property="confirmLabel" destination="HZA-8t-oBk" id="b80-Lr-5H6"/>
+                        <outlet property="confirmText" destination="nMf-xi-17b" id="Lo7-iM-cEw"/>
+                        <outlet property="passwordText" destination="7vO-dp-vFN" id="8cB-6L-cSD"/>
+                        <outlet property="segController" destination="LgR-i7-DFW" id="jPn-S2-4bJ"/>
+                        <outlet property="statusText" destination="raM-IX-zfr" id="Wzm-Tq-bee"/>
+                        <outlet property="userText" destination="AWw-qi-yCi" id="6Rp-W6-icc"/>
+                        <segue destination="KYf-ge-k99" kind="presentation" identifier="authID" modalPresentationStyle="fullScreen" id="jtM-ap-i81"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vDm-XH-Fhw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -354,7 +374,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxW-Z7-TB3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133" y="316"/>
+            <point key="canvasLocation" x="166" y="-28"/>
         </scene>
     </scenes>
     <resources>
