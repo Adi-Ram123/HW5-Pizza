@@ -3,10 +3,12 @@
 // Course: CS371L
 
 import UIKit
+import FirebaseFirestore
 
 class PizzaViewController: UIViewController {
 
     var createPizza: Pizza!
+    let db = Firestore.firestore()
     var delegate: UIViewController!
     @IBOutlet weak var sizeSelect: UISegmentedControl!
     @IBOutlet weak var sizeText: UILabel!
@@ -132,7 +134,18 @@ class PizzaViewController: UIViewController {
             cheeseText.text = createPizza.cheese
             meatText.text = createPizza.meat
             veggieText.text = createPizza.veggie
-            PizzaOrders.pizzaOrders.append(createPizza)
+            
+            let order = ["size": createPizza.size, "crust": createPizza.crust, "cheese": createPizza.cheese, "meat": createPizza.meat, "veggie": createPizza.veggie]
+            
+            db.collection("PizzaOrders").addDocument(data: order) {
+                (err) in
+                if let err = err {
+                    let alert = UIAlertController(title: "Creation Error", message: "An error occured when creating the pizza", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "Ok", style: .default)
+                    alert.addAction(ok)
+                    self.present(alert, animated: true)
+                }
+            }
             let tableVC = delegate as! PizzaReloader
             tableVC.reloadData()
         }
